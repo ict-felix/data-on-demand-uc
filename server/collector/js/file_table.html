@@ -1,0 +1,9 @@
+<table ng-table="smosFileTable" show-filter="true" class="table table-condensed table-bordered table-striped">
+    <tr ng-repeat="d in smosData">
+        <td data-title="'ID'" sortable="'id'">{{d.id}}</td>
+        <td data-title="'Testbed'" filter="{'testbed': 'text'}">{{d.testbed}}</td>
+        <td data-title="'Address'">{{d.address}}</td>
+        <td data-title="'Port'">{{d.port}}</td>
+        <td data-title="'File Name'" sortable="'file'" filter="{'file': 'text'}">{{d.file}}</td>
+    </tr>
+</table>

@@ -1,0 +1,38 @@
+<form role="form" name="operationForm" ng-controller="OperationsController">
+    <div class="form-group">
+        <label for="file">Choose a file</label>
+        <select class="form-control input-sm" id="file" ng-click="changeOptions(fileActive)" ng-model="fileActive" ui-select2>
+            <option ng-repeat="v in fileOptions">{{v}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon" id="host">Host</span>
+            <input type="text" class="form-control input-sm" ng-model="host" id="host" aria-describedby="host" placeholder="Hostname or IP-address">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon" id="destination">Destination</span>
+            <input type="text" class="form-control input-sm" ng-model="destination" id="destination" aria-describedby="destination" placeholder="Destination folder">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon" id="username">Username</span>
+            <input type="text" class="form-control input-sm" ng-model="username" id="username" aria-describedby="username" placeholder="Username">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon" id="password">Password</span>
+            <input type="password" class="form-control input-sm" ng-model="password" id="password" aria-describedby="password" placeholder="Password">
+        </div>
+    </div>
+
+    <p><a class="btn btn-primary btn-lg" role="button" ng-click="submit()">Submit</a></p>
+</form>

@@ -1,0 +1,17 @@
+{
+  "name": "FELIX data-preprocessing-on-demand",
+  "description": "",
+  "version": "0.0.1",
+  "homepage": "http://nextworks.it",
+  "license": "",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "ng-table": "~0.8.3",
+    "highstock-release": "~2.1.9"
+  }
+}

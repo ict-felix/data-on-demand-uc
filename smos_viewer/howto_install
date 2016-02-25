@@ -1,0 +1,19 @@
+# I am assuming a debian-based VM here.
+uname -a
+> Linux debian64prova 3.2.0-4-amd64 #1 SMP Debian 3.2.68-1+deb7u3 x86_64 GNU/Linux
+
+# as root
+su -
+# add the 32bit architecture (this tool is quit old, unfortunately!)
+dpkg --add-architecture i386
+apt-get update
+apt-get install ia32-libs
+ln -s /lib/i386-linux-gnu/libc.so.6 /lib/libc.so.6
+exit
+
+# install the software following the GUI
+PS=">" LAX_DEBUG=1 sh ./install.bin
+
+# run the tool
+cd SMOSView170
+./smosview

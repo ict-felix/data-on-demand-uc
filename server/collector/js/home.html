@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="DataPreprocOnDemandApp" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>FELIX DataPreprocOnDemand</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/files/app.css">
+        <link rel="stylesheet" media="screen" href="/static/libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/libs/ng-table/dist/ng-table.min.css">
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.23"></script>
+    </head>
+    <body>
+        <div id="top">
+            <div id="map" ui-view="map"></div>
+            <div id="results" ui-view="charts"></div>
+        </div>
+
+        <div id="middle">
+            <div id="files" ui-view="files"></div>
+            <div id="operations" ui-view="operations"></div>
+        </div>
+
+        <div id="footer-notes">
+            <div ng-controller="SliceController">
+                <button class="btn btn-success" ng-click="createSlice();">Create a Slice</button>
+                <button class="btn btn-danger" ng-click="deleteSlice();">Delete a Slice</button>
+            </div>
+        </div>
+
+        <script src="/static/libs/angular/angular.js"></script>
+        <script src="/static/libs/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="/static/libs/jquery/dist/jquery.min.js"></script>
+        <script src="/static/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/static/libs/ng-table/dist/ng-table.js"></script>
+        <script src="/static/libs/highstock-release/highstock.js"></script>
+        <script src="/static/libs/highstock-release/highcharts-more.js"></script>
+        <script src="/static/files/services.js"></script>
+        <script src="/static/files/controllers.js"></script>
+        <script src="/static/files/app.js"></script>
+    </body>
+</html>
