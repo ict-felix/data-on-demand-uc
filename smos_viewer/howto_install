@@ -8,6 +8,11 @@ su -
 dpkg --add-architecture i386
 apt-get update
 apt-get install ia32-libs
+
+# in ubuntu the previous libs are not supperted (anymore), install these ones
+apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+apt-get install libxtst6:i386
+#
 ln -s /lib/i386-linux-gnu/libc.so.6 /lib/libc.so.6
 exit
 

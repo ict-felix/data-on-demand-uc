@@ -5,13 +5,15 @@
 var ucControllers = angular.module('ucControllers', ['ui.router', 'ucServices']);
 
 ucControllers.controller('MapController', ['$scope', 'ucService', function ($scope, ucService) {
-    var gmap, ginfo;
+    var gmap, ginfo, polygon;
 
     function getRTT(event) {
         var info = '<b>RTTs:</b><br><br>';
         ucService.getRTT()
             .success(function (data) {
-                info += data;
+                info += data.text;
+                // fill the color of the polygon zone
+                polygon.setOptions({fillColor: data.color});
                 // Replace the info window's content and position.
                 ginfo.setContent(info);
                 ginfo.setPosition(event.latLng);
@@ -40,12 +42,12 @@ ucControllers.controller('MapController', ['$scope', 'ucService', function ($sco
                 });
             });
 
-            var polygon = new google.maps.Polygon({
+            polygon = new google.maps.Polygon({
                 paths: data.coordinates,
                 strokeColor: '#FF0000',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#FF0000',
+                //fillColor: '#FF0000',
                 fillOpacity: 0.35
             });
             polygon.setMap(gmap);
@@ -97,8 +99,6 @@ ucControllers.controller('FilesController', ['$scope', '$filter', 'ucService', '
 
 ucControllers.controller('OperationsController', ['$scope', 'ucService', 'operationsService', 'monitoringService',
                          function ($scope, ucService, operationsService, monitoringService) {
-    $scope.fileOptions = operationsService.names;
-
     $scope.submit = function () {
         console.log("Inputs", $scope.fileActive, $scope.host, $scope.destination, $scope.username, $scope.password);
         if (angular.isUndefined($scope.fileActive)) {
@@ -175,10 +175,10 @@ ucControllers.controller('SliceController', ['$scope', 'ucService', function ($s
 
         ucService.sliceCreate()
             .success(function (data) {
-                console.log("Data", data);
+                alert("Insert Flows success!\n" + data);
             })
             .error(function (e) {
-                alert("Slice creation failed! Please analyse the log file.\n" + e);
+                alert("Insert Flows failed! Please analyse the log file.\n" + e);
             });
     };
 
@@ -187,10 +187,10 @@ ucControllers.controller('SliceController', ['$scope', 'ucService', function ($s
 
         ucService.sliceDelete()
             .success(function (data) {
-                console.log("Data", data);
+                alert("Remove Flows success!\n" + data);
             })
             .error(function (e) {
-                alert("Slice deletion failed! Please analyse the log file.\n" + e);
+                alert("Remove Flows failed! Please analyse the log file.\n" + e);
             });
     };
 }]);

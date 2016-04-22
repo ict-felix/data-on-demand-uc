@@ -52,16 +52,24 @@ class RTTManager(threading.Thread):
             logger.error("RunTime error: %s" % (str(e),))
 
     def do_action(self, entry):
-        logger.debug("Entry: %s" % (entry))
-        resp = requests.get(url="http://%s:%s/ping/%s" % (entry['srcaddr'],
-                                                          entry['srcport'],
-                                                          entry['dstaddr']))
-        if resp.status_code != requests.codes.ok:
-            logger.error(resp.text)
-        else:
-            logger.debug("Response body: %s" % (resp.json()))
+        value = 0
+        try:
+            logger.debug("Entry: %s" % (entry))
+            resp = requests.get(url="http://%s:%s/ping/%s" %
+                                (entry['srcaddr'], entry['srcport'],
+                                 entry['dstaddr']))
+
+            if resp.status_code != requests.codes.ok:
+                logger.error(resp.text)
+            else:
+                logger.debug("Response body: %s" % (resp.json()))
+                value = resp.json().get('rtt')
+
+        except Exception as e:
+            logger.error("Action error: %s" % (str(e),))
+        finally:
             with self.__mutex:
-                entry['rtt'] = resp.json().get('rtt')
+                entry['rtt'] = value
 
     def get_table(self):
         with self.__mutex:

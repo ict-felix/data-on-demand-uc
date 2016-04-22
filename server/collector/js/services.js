@@ -1,4 +1,4 @@
-/*global angular, Highcharts */
+/*global angular, Highcharts, Set */
 /*jslint node: true */
 'use strict';
 
@@ -62,7 +62,7 @@ ucServices.service('ucService', ['$http', function ($http) {
                     rotation: -30
                 }
             },
-            yAxis: {title: {text: 'time (ms)'}},
+            yAxis: {title: {text: 'time (s)'}},
             legend: {enabled: true},
             plotOptions: {
                 area: {

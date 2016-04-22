@@ -132,9 +132,17 @@ def rtt():
     mon_table = RTTMANAGER.get_table()
     logger.debug("MonitorTable: %s" % (mon_table))
 
-    body = ""
+    body = {"text": "", "color": "red"}
+    tmp = []
     for entry in mon_table:
-        body += "%s: <b>%s</b> ms<br>" % (entry['name'], entry['rtt'])
+        body["text"] += "%s: <b>%s</b> ms<br>" % (entry['name'], entry['rtt'])
+        if entry['rtt'] != 0:
+            tmp.append(1)
+
+    if len(tmp) == len(mon_table):
+        body["color"] = "green"
+    elif len(tmp) > 0:
+        body["color"] = "yellow"
 
     return bottle.HTTPResponse(body=body, status=200)
 
@@ -185,23 +193,27 @@ def submit():
 
 @bottle.post('/createslice')
 def createslice():
-    url = "http://%s/stats/flowentry/add" %\
+    url = "http://%s/stats/enableinsert" %\
         settings.properties['sdncontroller']
-    logger.debug("Flows to be created: %s" % creflows.flows)
-    for f in creflows.flows:
-        logger.info("post %s: %s" % (url, f,))
-        r_ = requests.post(
-            url=url, headers={'content-type': 'application/json'},
-            data=json.dumps(f))
-        if r_.status_code != requests.codes.ok:
-            logger.error("Error in the response: %s" % r_)
-            bottle.abort(500, r_)
+    r_ = requests.get(url=url)
+    if r_.status_code != requests.codes.ok:
+        logger.error(r_.text)
+    else:
+        logger.debug("Enable insert body: %s" % (r_.json()))
 
     return bottle.HTTPResponse(body=[], status=201)
 
 
 @bottle.post('/deleteslice')
 def deleteslice():
+    url = "http://%s/stats/disableinsert" %\
+        settings.properties['sdncontroller']
+    r_ = requests.get(url=url)
+    if r_.status_code != requests.codes.ok:
+        logger.error(r_.text)
+    else:
+        logger.debug("Disable insert body: %s" % (r_.json()))
+
     url = "http://%s/stats/flowentry/delete" %\
         settings.properties['sdncontroller']
     logger.debug("Flows to be deleted: %s" % delflows.flows)

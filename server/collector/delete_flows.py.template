@@ -37,3 +37,18 @@ flows = [
         ]
     }
 ]
+def flow_entry_details(dpid, vlan):
+    entry = {
+        "dpid": dpid,
+        "match": {
+            "dl_vlan": vlan
+        }
+    }
+    return entry
+
+flows = []
+
+flows.append( flow_entry_details(4503599627370499, 2978) )
+flows.append( flow_entry_details(4503599627370497, 2978) )
+flows.append( flow_entry_details(9354246419888, 3000) )
+flows.append( flow_entry_details(1, 1795) )

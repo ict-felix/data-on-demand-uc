@@ -3,9 +3,9 @@ properties = dict(
     sdncontroller="10.0.9.100:8080",
     peers=dict(
         # a list of available agents, i.e <addr:port>
-        i2cat=["10.0.9.100:9001"],
-        psnc=["10.0.9.100:9002"],
-        aist=["10.0.9.100:9003"]
+        i2cat=["10.0.9.100:9001", "10.0.9.100:9002"],
+        psnc=["10.0.9.100:9003"],
+        aist=["10.0.9.100:9004"]
     ),
     monitor=[
         {

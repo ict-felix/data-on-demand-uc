@@ -1,9 +1,9 @@
 <form role="form" name="operationForm" ng-controller="OperationsController">
     <div class="form-group">
-        <label for="file">Choose a file</label>
-        <select class="form-control input-sm" id="file" ng-click="changeOptions(fileActive)" ng-model="fileActive" ui-select2>
-            <option ng-repeat="v in fileOptions">{{v}}</option>
-        </select>
+        <div class="input-group">
+            <span class="input-group-addon" id="file">File</span>
+            <input type="text" class="form-control input-sm" ng-model="fileActive" id="fileActive" aria-describedby="fileActive" placeholder="Choose a file">
+        </div>
     </div>
 
     <div class="form-group">
